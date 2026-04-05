@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; style-src 'self' 'unsafe-inline'"
+    />
+    <title>Vivobook performance force</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #1a1b1e;
+        --panel: #25262b;
+        --text: #e9e9ec;
+        --muted: #909296;
+        --accent: #4c6ef5;
+        --accent-hover: #5c7cfa;
+        --danger: #fa5252;
+        --ok: #40c057;
+        font-family: 'Segoe UI', system-ui, sans-serif;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f8f9fa;
+          --panel: #fff;
+          --text: #212529;
+          --muted: #868e96;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 20px;
+        background: var(--bg);
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      h1 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0 0 6px;
+      }
+      .sub {
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 18px;
+      }
+      fieldset {
+        border: 1px solid rgba(128, 128, 128, 0.25);
+        border-radius: 8px;
+        margin: 0 0 16px;
+        padding: 12px 14px;
+        background: var(--panel);
+      }
+      legend {
+        padding: 0 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .modes label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0;
+        cursor: pointer;
+      }
+      .modes input {
+        accent-color: var(--accent);
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      button {
+        flex: 1;
+        padding: 10px 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      #start {
+        background: var(--accent);
+        color: #fff;
+      }
+      #start:hover:not(:disabled) {
+        background: var(--accent-hover);
+      }
+      #stop {
+        background: var(--danger);
+        color: #fff;
+      }
+      #stop:hover:not(:disabled) {
+        filter: brightness(1.08);
+      }
+      .log {
+        font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        padding: 10px 12px;
+        min-height: 100px;
+        max-height: 140px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+        color: var(--muted);
+      }
+      .log .line.ok {
+        color: var(--ok);
+      }
+      .log .line.err {
+        color: var(--danger);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Asus Vivobook — performance force</h1>
+    <p class="sub">
+      Re-applies the selected performance mode every 10 seconds. Run this app
+      <strong>as Administrator</strong> or the ATKACPI device will not open.
+      Closing the window keeps the app in the <strong>system tray</strong>; right‑click the tray icon and choose
+      <strong>Quit</strong> to exit.
+    </p>
+
+    <fieldset class="modes">
+      <legend>Performance mode (same as fan-0 / fan-1 / fan-2)</legend>
+      <label><input type="radio" name="mode" value="0" checked /> Mode 0</label>
+      <label><input type="radio" name="mode" value="1" /> Mode 1</label>
+      <label><input type="radio" name="mode" value="2" /> Mode 2</label>
+    </fieldset>
+
+    <div class="row">
+      <button type="button" id="start">Start</button>
+      <button type="button" id="stop" disabled>Stop</button>
+    </div>
+
+    <div class="log" id="log" aria-live="polite"></div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

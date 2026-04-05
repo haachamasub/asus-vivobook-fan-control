@@ -1,0 +1,66 @@
+{
+  "name": "vivobook-fan-gui",
+  "version": "1.0.0",
+  "main": "electron-main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gui": "electron electron-main.js",
+    "build:gui": "electron-builder --win"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Asus Vivobook ATKACPI performance mode tray GUI",
+  "dependencies": {
+    "koffi": "^2.15.2"
+  },
+  "devDependencies": {
+    "electron": "^35.0.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "com.local.vivobook-fan-gui",
+    "productName": "Vivobook Fan GUI",
+    "icon": "assets/tray.png",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron-main.js",
+      "preload.js",
+      "fan-core.js",
+      "gui/**/*",
+      "assets/**/*"
+    ],
+    "asar": true,
+    "forceCodeSigning": false,
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.exe"
+    }
+  }
+}
