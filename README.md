@@ -29,8 +29,6 @@ If you want to avoid the 500MB overhead, you can run the logic directly via npm/
 
 ```bash
 # Clone the repo
-git clone [https://github.com/your-repo/asus-fan-fix](https://github.com/your-repo/asus-fan-fix)
-cd asus-fan-fix
 
 # Install dependencies
 npm install
